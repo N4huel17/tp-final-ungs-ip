@@ -2,7 +2,7 @@
 ## Trabajo práctico: galería de imágenes de la NASA 🚀
 
 
-![Galería de Imágenes de la NASA](https://api.nasa.gov/assets/img/general/apod.jpg)
+![Galería de Imágenes   . de la NASA](https://api.nasa.gov/assets/img/general/apod.jpg)
 
 ### Introducción
 - El trabajo consiste en implementar una aplicación web *fullstack* usando **[Django Framework](https://docs.djangoproject.com/en/4.2/)** que permita consultar las imágenes de la API pública que proporciona la NASA. La información que provenga de esta API será renderizada por el *framework* en distintas *cards* que mostrarán -como mínimo- la imagen en cuestión, un título y una descripción. Adicionalmente -y para enriquecerla- se prevee que los estudiantes desarrollen la lógica necesaria para hacer funcionar el buscador central y un módulo de autenticación básica (usuario/contraseña) para almacenar uno o más resultados como **favoritos**, que luego podrán ser consultados por el usuario al loguearse. En este último, la app deberá tener la lógica suficiente para verificar cuándo una imagen fue marcada en favoritos.
