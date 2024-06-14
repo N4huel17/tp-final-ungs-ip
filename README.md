@@ -26,3 +26,17 @@ Python Debugger.
 5)  https://sqlitebrowser.org/dl/ (descargar )
 
 
+### Metodologia de trabajo: 
+trabajo de ramas, cada integrante tendra su rama donde deberar trabajar en sus tareas
+1) Rama principal: (Main o master/ dependiendo de la configuracion de la pc )
+2) rama de cada integrante
+diego01
+valentin01
+nahuel01
+3) comandos : 
+git pull (bajar cambios )
+git add . (guardar cambios hechos )
+git commit -m"mensaje describiendo lo realizado "
+git push origin nombreDelaRama (diego01,valen01,nahuel01)
+
+IMPORTANTE: Antes de empezar a realizar tareas deberan hacer "git pull" en main y bajar los cambios para evitar confictos, luego deberan moverse a sus ramas (git checkout nombre_de_la_rama), seguido una vez estando en su rama poner el comando "git merge main", para traer los cambios de main a sus rama .NUNCA MERGEAR UNA RAMA ESTANDO PARADO EN MAIN
