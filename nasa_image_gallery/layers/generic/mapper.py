@@ -35,3 +35,11 @@ def fromRepositoryIntoNASACard(repo_dict):
                         date=repo_dict['date'],
                 )
     return nasa_card
+
+def json_to_nasa_card(json_obj):
+    return NASACard(
+        title=json_obj['data'][0]['title'],
+        description=json_obj['data'][0]['description'],
+        image_url=json_obj['links'][0]['href'],
+        date=json_obj['data'][0]['date_created'][:10]
+    )
