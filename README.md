@@ -44,14 +44,22 @@ IMPORTANTE: Antes de empezar a realizar tareas deberan hacer "git pull" en main 
 Metodologia Agil: 
 SCRUM = Sofware Taiga (repartición de tareas e informes). 
 
-Explicación Funcionalidades = 
+Explicación Funcionalidades Implementadas :
 -Nahuel (mostrar las fotos desde la API de la NASA).
 Cambios en views.py: Importación Directa de la Función getAllImages:  desde services_nasa_image_gallery.py.
 Uso de getAllImages en home: En la función home, llama a getAllImages() para obtener todas las imágenes desde la API de NASA.
 Pasaje de Imágenes : Las imágenes obtenidas se pasan como contexto al template 'home.html', donde serán renderizadas.
 
-
 Cambios en services_nasa_image_gallery.py:
 Uso de getAllImages desde transport.py: Importamos y llamamos directamente la función getAllImages desde transport.py para obtener los datos JSON de la API de NASA.
 Mapeo a Objetos NASACard: Utilizamos el mapeador fromRequestIntoNASACard para convertir cada objeto JSON en un objeto NASACard.
 Retorno de Imágenes Mapeadas: Finalmente, retornamos la lista de imágenes convertidas en objetos NASACard.
+
+-Nahuel (Hacer que el buscador funcione):
+Archivo views.py:
+Función search(request): Se modificó para manejar tanto la búsqueda como el caso donde no se ingresa ningún término devolver por defecto "space".
+
+*Se utilizó el método POST del formulario para obtener el término de búsqueda (search_msg).
+*Se llamó a services_nasa_image_gallery.getAllImages() con el término de búsqueda para obtener las imágenes filtradas.
+*Si no se proporcionó un término de búsqueda, se llamó a services_nasa_image_gallery.getAllImages() sin parámetros, lo que devuelve las imágenes relacionadas con "SPACE".
+

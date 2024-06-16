@@ -30,8 +30,20 @@ def home(request):
 
 # función utilizada en el buscador.
 def search(request):
-    images, favourite_list = getAllImagesAndFavouriteList(request)
-    search_msg = request.POST.get('query', '')
+    if request.method== 'POST':
+        search_msg = request.POST.get('query', '').strip()
+        if search_msg:
+            images= services_nasa_image_gallery.getAllImages(search_msg)
+        else:
+            images=services_nasa_image_gallery.getAllImages()
+        favourite_list=[]  
+        if request.user.is_authenticated:
+            favourite_list=  services_nasa_image_gallery.getAllFavouritesByUser(request)
+        return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list})    
+  
+   
+    else:
+          return render(request, 'home.html', {'images': [], 'favourite_list': []})
 
     # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, debe filtrar aquellas imágenes que posean el texto de búsqueda.
     pass
