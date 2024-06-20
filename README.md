@@ -63,3 +63,30 @@ Función search(request): Se modificó para manejar tanto la búsqueda como el c
 *Se llamó a services_nasa_image_gallery.getAllImages() con el término de búsqueda para obtener las imágenes filtradas.
 *Si no se proporcionó un término de búsqueda, se llamó a services_nasa_image_gallery.getAllImages() sin parámetros, lo que devuelve las imágenes relacionadas con "SPACE".
 
+Valentin:
+cambios en header.html 
+se cambiaron las redirecciones para que al apretar en iniciar sesion te mande a /login y al salir la redireccion sea exit
+
+cambios en view.py
+se implementaron las funciones login y authenticate donde la funcion
+authenticate verifica las credenciales del usuario(nombre y contraseña)
+con los usuarios que se registraron en sistema. Si las credenciales son correctas,
+inicia sesion. la funcion login inicia una sesión para el usuario que está autenticado en el sistema,
+lo que permite al usuario permanecer autenticado para gestionar alguna accion en la pagina
+se crearon la funcion login_view:
+Maneja la lógica de autenticación de los usuarios. Verifica que los valores proporcionadas por el usuario y
+si son correctas inicia sesión al usuario y lo redirige a la página principal. Si las credenciales 
+no son correctas, salta error
+logout_view:
+Cierra la sesión del usuario y lo redirige a la página de inicio
+getAllFavouritesByUser:
+renderiza la página de favoritos del usuario
+saveFavourite:
+agrega un elemento a la lista de favoritos del usuario
+deleteFavourite:
+ elimina un elemento de la lista de favoritos del usuario
+
+
+
+
+
