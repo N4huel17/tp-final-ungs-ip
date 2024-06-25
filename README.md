@@ -3,7 +3,6 @@
 ## Trabajo práctico: galería de imágenes de la NASA 🚀
 
 ##INTEGRANTES:
--DIEGO UGARTE
 -NAHUEL MENDEZ
 -VALENTIN ROMANO
 
@@ -24,14 +23,14 @@ Python Debugger.
 3) python manage.py runserver 3000 (comando para levantar el proyecto) 
 4) http://localhost:3000 (poner esa url en el navegador)
 5)  https://sqlitebrowser.org/dl/ (descargar )
+6) SuperUser: admin@gmail.com (contraseña:admin)
 
 
 ### Metodologia de trabajo: 
 trabajo de ramas, cada integrante tendra su rama donde debera trabajar en sus tareas.
 1) Rama principal: (Main o master/ dependiendo de la configuracion de la pc )
 2) rama de cada integrante
-diego01
-valentin01
+valen01
 nahuel01
 3) comandos : 
 git pull (bajar cambios )
@@ -44,22 +43,64 @@ IMPORTANTE: Antes de empezar a realizar tareas deberan hacer "git pull" en main 
 Metodologia Agil: 
 SCRUM = Sofware Taiga (repartición de tareas e informes). 
 
-Explicación Funcionalidades Implementadas :
+Explicación Funcionalidades Implementadas en el proyecto  :
 -Nahuel (mostrar las fotos desde la API de la NASA).
-Cambios en views.py: Importación Directa de la Función getAllImages:  desde services_nasa_image_gallery.py.
+
+*Cambios en views.py:
+Importación Directa de la Función getAllImages:  desde services_nasa_image_gallery.py.
 Uso de getAllImages en home: En la función home, llama a getAllImages() para obtener todas las imágenes desde la API de NASA.
 Pasaje de Imágenes : Las imágenes obtenidas se pasan como contexto al template 'home.html', donde serán renderizadas.
 
-Cambios en services_nasa_image_gallery.py:
+*Cambios en services_nasa_image_gallery.py:
 Uso de getAllImages desde transport.py: Importamos y llamamos directamente la función getAllImages desde transport.py para obtener los datos JSON de la API de NASA.
 Mapeo a Objetos NASACard: Utilizamos el mapeador fromRequestIntoNASACard para convertir cada objeto JSON en un objeto NASACard.
 Retorno de Imágenes Mapeadas: Finalmente, retornamos la lista de imágenes convertidas en objetos NASACard.
 
 -Nahuel (Hacer que el buscador funcione):
-Archivo views.py:
+*Archivo views.py:
 Función search(request): Se modificó para manejar tanto la búsqueda como el caso donde no se ingresa ningún término devolver por defecto "space".
 
 *Se utilizó el método POST del formulario para obtener el término de búsqueda (search_msg).
 *Se llamó a services_nasa_image_gallery.getAllImages() con el término de búsqueda para obtener las imágenes filtradas.
 *Si no se proporcionó un término de búsqueda, se llamó a services_nasa_image_gallery.getAllImages() sin parámetros, lo que devuelve las imágenes relacionadas con "SPACE".
+
+-Valentin:
+cambios en header.html 
+se cambiaron las redirecciones para que al apretar en iniciar sesion te mande a /login y al salir la redireccion sea exit
+
+cambios en view.py:
+se implementaron las funciones login y authenticate donde la funcion
+authenticate verifica las credenciales del usuario(nombre y contraseña)
+con los usuarios que se registraron en sistema. Si las credenciales son correctas,
+inicia sesion. la funcion login inicia una sesión para el usuario que está autenticado en el sistema,
+lo que permite al usuario permanecer autenticado para gestionar alguna accion en la pagina
+se crearon la funcion login_view:
+Maneja la lógica de autenticación de los usuarios. Verifica que los valores proporcionadas por el usuario y
+si son correctas inicia sesión al usuario y lo redirige a la página principal. Si las credenciales 
+no son correctas, salta error
+
+logout_view:
+Cierra la sesión del usuario y lo redirige a la página de inicio
+getAllFavouritesByUser:
+renderiza la página de favoritos del usuario
+saveFavourite:
+agrega un elemento a la lista de favoritos del usuario
+deleteFavourite:
+ elimina un elemento de la lista de favoritos del usuario
+
+ -Nahuel : (Dar de alta anuevos usuarios y enviar email de confirmacion)
+
+ *Cambios en models.py:
+Modelo de Usuario Personalizado: Se creó un modelo de usuario personalizado (MyUser) que extiende AbstractBaseUser de Django. Esto permite utilizar el correo electrónico como campo de identificación principal.
+
+*Cambios en forms.py:
+Formulario de Registro: Se implementó un formulario de registro (RegisterForm) utilizando ModelForm de Django para capturar y validar los datos del usuario durante el registro.
+
+
+*Cambios en la Configuración:
+Configuración del Modelo de Usuario Personalizado: Se actualizó el archivo settings.py para especificar que se utiliza un modelo de usuario personalizado (MyUser) en lugar del modelo de usuario predeterminado de Django. se creó un gmail ficticio para enviar los email de configuracion y se creó una clave para app de terceros, y se creó un "super Admin ".
+
+
+
+
 

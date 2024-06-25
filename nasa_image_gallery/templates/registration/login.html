@@ -1,7 +1,8 @@
 {% extends 'header.html' %} {% block content %}
 <div class="login-form" style="text-align: center;">
-    <form action="" method="POST" style="display: inline-block;">
+    <form action="{% url 'login' %}" method="POST" style="display: inline-block;">
         {% csrf_token %}
+         <!-- se agrego una redireccion para que muestre el logeo -->
         <h2 class="text-center">Inicio de sesión</h2>
         <div class="form-group" style="margin-bottom: 5%;">
             <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required="required">
@@ -11,7 +12,14 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+            <a class="nav-link" href="{% url 'register' %}">¿No tienes cuenta?Registrate!</a> 
         </div>
+        
+
     </form>
+    
+   
+       
+   
 </div>
 {% endblock %}
