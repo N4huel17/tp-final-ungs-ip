@@ -1,5 +1,4 @@
-# nasa_image_gallery/models.py
-
+# models.py
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -61,8 +60,12 @@ class Favourite(models.Model):
     description = models.TextField()
     image_url = models.TextField()
     date = models.DateField()
+    comment = models.TextField(blank=True, null=True)  # Nuevo campo para los comentarios
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('user', 'title', 'description', 'image_url', 'date')
+
+
+       
