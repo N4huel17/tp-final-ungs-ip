@@ -31,13 +31,17 @@
                         <td>{{ favorito.title }}</td>
                         <td>{{ favorito.description }}</td>
                         <td>{{ favorito.date }}</td>
+                        
                         <td>
-                            <form method="post" action="{% url 'guardar-comentario' %}">
+                            <form method="post" action="{% url 'guardar_comentario' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="id" value="{{ favorito.id }}">
-                                <textarea name="comment" rows="2" cols="30">{{ favorito.comment|default:"" }}</textarea>
+                                <textarea name="comment" rows="2" cols="30">{{ favorito.comment|default:"Actualmente sin comentarios" }}</textarea>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </form>
+                          
+
+
                         </td>
                         <td>
                             <form method="post" action="{% url 'borrar-favorito' %}">
@@ -53,4 +57,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}

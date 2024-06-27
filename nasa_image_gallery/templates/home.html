@@ -1,4 +1,5 @@
-{% extends 'header.html' %} {% block content %}
+{% extends 'header.html' %}
+{% block content %}
 <main>
     <h1 class="text-center">Galería de Imágenes de la NASA</h1>
     <div class="d-flex justify-content-center" style="margin-bottom: 1%">
@@ -9,14 +10,27 @@
         </form>
     </div>
 
+    <!-- Selección de imágenes por página -->
+    <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0">
+            <label for="per_page">Imágenes por página:</label>
+            <select class="form-control mr-sm-2" id="per_page" name="per_page">
+                {% for option in per_page_options %}
+                    <option value="{{ option }}" {% if option == per_page %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Actualizar</button>
+        </form>
+    </div>
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for imagen in page_obj %}
         <div class="col">
             <div class="card">
-                <img src="{{ imagen.image_url}}" class="card-img-top" alt="imagen">
+                <img src="{{ imagen.image_url }}" class="card-img-top" alt="imagen">
                 <div class="card-body">
-                    <h5 class="card-title">{{ imagen.title}}</h5>
-                    <p class="card-text">{{ imagen.description}}</p>
+                    <h5 class="card-title">{{ imagen.title }}</h5>
+                    <p class="card-text">{{ imagen.description }}</p>
                 </div>
                 {% if request.user.is_authenticated %}
                 <div class="card-footer text-center">
@@ -28,9 +42,9 @@
                         <input type="hidden" name="date" value="{{ imagen.date }}">
 
                         {% if imagen in favourite_list %}
-                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" disabled>✔️ Ya está añadida a favoritos</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" disabled>✔️ Ya está añadida a favoritos</button>
                         {% else %}
-                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white">❤️ Añadir a favoritos</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white">❤️ Añadir a favoritos</button>
                         {% endif %}
                     </form>
                 </div>
@@ -39,52 +53,56 @@
         </div>
         {% endfor %}
     </div>
-
-    <!-- Paginación -->
-    <div class="d-flex justify-content-center mt-4">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1&per_page={{ per_page }}" aria-label="First">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
-                </li>
+<!-- Paginación -->
+<div class="d-flex justify-content-center mt-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                {% else %}
-                <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>
+            {% else %}
                 <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-                {% endif %}
+            {% endif %}
 
-                {% for num in page_obj.paginator.page_range %}
+            {% for num in page_obj.paginator.page_range %}
                 {% if page_obj.number == num %}
-                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
                 {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}&per_page={{ per_page }}">{{ num }}</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}&per_page={{ per_page }}">{{ num }}</a></li>
                 {% endif %}
-                {% endfor %}
+            {% endfor %}
 
-                {% if page_obj.has_next %}
+            {% if page_obj.has_next %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&per_page={{ per_page }}" aria-label="Last">
-                        <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-                {% else %}
+            {% else %}
                 <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-                <li class="page-item disabled"><span class="page-link">&raquo;&raquo;</span></li>
-                {% endif %}
-            </ul>
-        </nav>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+<footer i class="footer bg-body-tertiary text-center text-lg-start ">
+    <div class="container-fluid p-3" style="background-color: rgba(255, 255, 255, 0.78);">
+        <div class="d-flex justify-content-between">
+            <strong class="text-center">Introducción a la Programación | UNGS</strong>
+            <strong>{{ VERSION }}</strong>
+        </div>
     </div>
+</footer>
+
+
+   
+    
+    
+ 
 </main>
+
 {% endblock %}

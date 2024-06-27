@@ -5,7 +5,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from .forms import RegisterForm
-from .models import MyUser, Favourite
+from .models import MyUser
+from .models import Favourite
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 
@@ -19,13 +20,24 @@ def getAllImagesAndFavouriteList(request):
         favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
     return images, favourite_list
 
+
 def home(request):
-    images, favourite_list = getAllImagesAndFavouriteList(request)
-    per_page = int(request.GET.get('per_page', 5))
+    images = services_nasa_image_gallery.getAllImages()  # Obtener todas las imágenes
+    favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
+    
+    per_page_options = [4, 6, 8, 10, 12]  # Opciones de cantidad de imágenes por página
+    per_page = int(request.GET.get('per_page', 6))  # Obtener el número de imágenes por página seleccionado por el usuario
+    
     paginator = Paginator(images, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'home.html', {'page_obj': page_obj, 'favourite_list': favourite_list, 'per_page': per_page})
+    
+    return render(request, 'home.html', {
+        'page_obj': page_obj,
+        'favourite_list': favourite_list,
+        'per_page': per_page,
+        'per_page_options': per_page_options  # Pasar las opciones de cantidad por página a la plantilla
+    })
 
 def search(request):
     if request.method == 'POST':
