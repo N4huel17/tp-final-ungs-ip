@@ -100,7 +100,18 @@ Formulario de Registro: Se implementó un formulario de registro (RegisterForm) 
 *Cambios en la Configuración:
 Configuración del Modelo de Usuario Personalizado: Se actualizó el archivo settings.py para especificar que se utiliza un modelo de usuario personalizado (MyUser) en lugar del modelo de usuario predeterminado de Django. se creó un gmail ficticio para enviar los email de configuracion y se creó una clave para app de terceros, y se creó un "super Admin ".
 
+-NAHUEL : (Implementación de Paginación y Selección de Imágenes por Página):
+ *views.py:
+Función home:
+Se añadió la lógica para manejar la paginación y la selección de imágenes por página.
+Se importó el módulo Paginator de Django.
+Se añadió la variable per_page para obtener la cantidad de imágenes por página seleccionada por el usuario.
+Se configuró el objeto Paginator con la lista de imágenes y la cantidad de imágenes por página.
+Se añadió el contexto necesario para la paginación y la selección de imágenes por página.
 
-
+*home.html:
+Se añadió un formulario para que el usuario pueda seleccionar la cantidad de imágenes por página.
+Se añadió la estructura de paginación utilizando las clases de Bootstrap para una mejor apariencia.
+Se actualizaron los enlaces de la paginación para incluir la selección de imágenes por página.
 
 

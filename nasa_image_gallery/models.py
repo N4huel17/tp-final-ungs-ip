@@ -1,5 +1,4 @@
-# nasa_image_gallery/models.py
-
+# models.py
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -55,14 +54,15 @@ class MyUser(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
-# Ahora definimos el modelo Favourite actualizado
+
 class Favourite(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     image_url = models.TextField()
     date = models.DateField()
+    comment = models.TextField(null=True, blank=True)  # Nuevo campo para los comentarios
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('user', 'title', 'description', 'image_url', 'date')
+        unique_together = ('user', 'title', 'description', 'image_url', 'date', 'comment')

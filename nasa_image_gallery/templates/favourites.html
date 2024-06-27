@@ -1,4 +1,6 @@
-{% extends 'header.html' %} {% block content %}
+<!-- favourites.html -->
+{% extends 'header.html' %} 
+{% block content %}
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -17,17 +19,30 @@
                         <th>Título <i class="fa fa-sort"></i></th>
                         <th>Descripción</th>
                         <th>Fecha <i class="fa fa-sort"></i></th>
+                        <th>Comentario</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for favorito in favourite_list %}
                     <tr>
-                        <td>-</td>
+                        <td>{{ forloop.counter }}</td>
                         <td><img src="{{ favorito.image_url }}" alt="" style="max-width: 200px; max-height: 200px;"></td>
                         <td>{{ favorito.title }}</td>
                         <td>{{ favorito.description }}</td>
                         <td>{{ favorito.date }}</td>
+                        
+                        <td>
+                            <form method="post" action="{% url 'guardar_comentario' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ favorito.id }}">
+                                <textarea name="comment" rows="2" cols="30">{{ favorito.comment|default:"Actualmente sin comentarios" }}</textarea>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                          
+
+
+                        </td>
                         <td>
                             <form method="post" action="{% url 'borrar-favorito' %}">
                                 {% csrf_token %}
@@ -42,4 +57,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
