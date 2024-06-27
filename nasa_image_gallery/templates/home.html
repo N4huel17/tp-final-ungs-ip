@@ -1,28 +1,60 @@
 {% extends 'header.html' %}
 {% block content %}
 <main>
-    <h1 class="text-center">Galería de Imágenes de la NASA</h1>
-    <div class="d-flex justify-content-center" style="margin-bottom: 1%">
-        <form class="d-flex" action="{% url 'buscar' %}" method="POST">
+    <h1 class="text-center"style="color: #00006b; font-weight: bolder;"  >Galería de Imágenes de la NASA</h1>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <!-- Formulario de búsqueda -->
+        <form class="d-flex mr-3" action="{% url 'buscar' %}" method="POST">
             {% csrf_token %}
             <input class="form-control me-2" type="search" name="query" placeholder="Buscar.." aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <button   class="btn btn-custom" type="submit">Buscar</button>
         </form>
-    </div>
-
-    <!-- Selección de imágenes por página -->
-    <div class="d-flex justify-content-center">
-        <form class="form-inline my-2 my-lg-0">
-            <label for="per_page">Imágenes por página:</label>
+    
+        <!-- Espacio entre formularios -->
+        <div style="width: 40px;"></div>
+        <style>
+            .btn-custom {
+                color: #00006b;
+                border-color: #00006b;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+        
+            .btn-custom:hover {
+                background-color: #00006b;
+                color: white;
+            }
+        </style>
+    
+        <!-- Selección de imágenes por página -->
+        <form class="form-inline" style="display: flex;">
             <select class="form-control mr-sm-2" id="per_page" name="per_page">
                 {% for option in per_page_options %}
                     <option value="{{ option }}" {% if option == per_page %}selected{% endif %}>{{ option }}</option>
                 {% endfor %}
             </select>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Actualizar</button>
+            <button   class="btn btn-custom" type="submit">Ok</button>
         </form>
+        
     </div>
 
+    <style>
+        .card {
+            height: 100%; 
+            transition: transform 0.2s ease;
+        }
+    
+        .card:hover {
+            transform: scale(1.05); 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            z-index: 1; 
+        }
+    
+        .card-body {
+            max-height: 200px; 
+            overflow-y: auto; 
+        }
+    </style>
+    
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for imagen in page_obj %}
         <div class="col">
@@ -40,11 +72,12 @@
                         <input type="hidden" name="description" value="{{ imagen.description }}">
                         <input type="hidden" name="image_url" value="{{ imagen.image_url }}">
                         <input type="hidden" name="date" value="{{ imagen.date }}">
-
+        
                         {% if imagen in favourite_list %}
-                            <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" disabled>✔️ Ya está añadida a favoritos</button>
+                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" disabled>&#9989; Añadida en favoritos</button>
+                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showComment('{{ imagen.title }}', '{{ imagen.comment|default:"Sin comentarios actualmente" }}')">&#128196; Comentario</button>
                         {% else %}
-                            <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white">❤️ Añadir a favoritos</button>
+                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showMessage('{{ imagen.title }}')">⭐ Añadir a favoritos</button>
                         {% endif %}
                     </form>
                 </div>
@@ -53,6 +86,57 @@
         </div>
         {% endfor %}
     </div>
+    
+    <!-- Modal para mostrar mensaje de confirmación -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">¡Imagen añadida a favoritos!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para mostrar comentario -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Comentario de <span id="modalTitle"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalComment"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showMessage(title) {
+         
+            document.getElementById('modalMessage').innerText = `${title} se añadió a favoritos.`;
+
+            var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'), {
+                keyboard: false
+            });
+            confirmationModal.show();
+        }
+    
+        function showComment(title, comment) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalComment').innerText = comment;
+            var commentModal = new bootstrap.Modal(document.getElementById('commentModal'), {
+                keyboard: false
+            });
+            commentModal.show();
+        }
+    </script>
 <!-- Paginación -->
 <div class="d-flex justify-content-center mt-4">
     <nav aria-label="Page navigation">
@@ -90,7 +174,7 @@
 
 
 <footer i class="footer bg-body-tertiary text-center text-lg-start ">
-    <div class="container-fluid p-3" style="background-color: rgba(255, 255, 255, 0.78);">
+    <div class="container-fluid p-3" style="background-color: black; color: white;">
         <div class="d-flex justify-content-between">
             <strong class="text-center">Introducción a la Programación | UNGS</strong>
             <strong>{{ VERSION }}</strong>

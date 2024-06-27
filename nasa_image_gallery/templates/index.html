@@ -1,10 +1,46 @@
-{% extends 'header.html' %} {% block content %} {% if request.user.is_authenticated %}
-<h2 class="text-center">Bienvenido {{ user.username | upper }}!</h2>
-{% else %}
-<h2 class="text-center">Bienvenido!</h2>
-{% endif %}
-<p class="text-center">
-    Mirá las imágenes desde <a href="{% url 'home' %}">este link.</a>
-</p>
+{% extends 'header.html' %}
+{% load static %} 
+{% block content %}
+<style>
+    .background {
+        background-image: url("{% static 'img/found.jpg' %}");
+        background-size: auto; 
+        background-repeat: repeat; 
+        background-position: top left; 
+        min-height: 100vh; 
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    h2, p {
+        color: white;
+        font-size: 40px;
+        font-weight: bolder;
+    }
+
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: blue;
+    }
+</style>
+
+<div class="background">
+    {% if request.user.is_authenticated %}
+    <h2>Bienvenido {{ user.username | upper }}!</h2>
+    {% else %}
+    <h2>Bienvenido!</h2>
+    {% endif %}
+    <p>
+        Mirá las imágenes desde <a href="{% url 'home' %}">este link.</a>
+    </p>
+</div>
 
 {% endblock %}

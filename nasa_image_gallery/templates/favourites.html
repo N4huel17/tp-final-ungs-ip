@@ -36,18 +36,15 @@
                             <form method="post" action="{% url 'guardar_comentario' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="id" value="{{ favorito.id }}">
-                                <textarea name="comment" rows="2" cols="30">{{ favorito.comment|default:"Actualmente sin comentarios" }}</textarea>
+                                <textarea name="comment" rows="2" cols="20">{{ favorito.comment|default:"Actualmente sin comentarios" }}</textarea>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </form>
-                          
-
-
                         </td>
                         <td>
-                            <form method="post" action="{% url 'borrar-favorito' %}">
+                            <form id="deleteForm{{ favorito.id }}" method="post" action="{% url 'borrar-favorito' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="id" value="{{ favorito.id }}">
-                                <button type="submit" class="btn" style="color:red"><i class="material-icons">&#xE872;</i></button>
+                                <button type="button" class="btn" style="color:red" onclick="showDeleteConfirmation('{{ favorito.title }}', '{{ favorito.id }}')"><i class="material-icons">&#xE872;</i></button>
                             </form>
                         </td>
                     </tr>
@@ -57,5 +54,36 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para mostrar mensaje de eliminación -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">¡Imagen eliminada de favoritos!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteModalMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDeleteConfirmation(title, id) {
+        // Setear el mensaje en el modal de confirmación de eliminación
+        document.getElementById('deleteModalMessage').innerText = `${title} se ha eliminado de favoritos exitosamente.`;
+        // Mostrar el modal de confirmación de eliminación
+        var deleteConfirmationModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'), {
+            keyboard: false
+        });
+        deleteConfirmationModal.show();
+        
+        // Enviar el formulario de eliminación al confirmar
+        var deleteForm = document.getElementById(`deleteForm${id}`);
+        deleteForm.submit();
+    }
+</script>
 
 {% endblock %}
