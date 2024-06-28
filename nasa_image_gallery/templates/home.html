@@ -1,13 +1,15 @@
 {% extends 'header.html' %}
 {% block content %}
+{% load i18n %}
+
 <main>
-    <h1 class="text-center"style="color: #00006b; font-weight: bolder;"  >Galería de Imágenes de la NASA</h1>
+    <h1 class="text-center" style="color: #00006b; font-weight: bolder;">{% trans "Galería de Imágenes de la NASA" %}</h1>
     <div class="d-flex justify-content-center align-items-center mb-3">
         <!-- Formulario de búsqueda -->
         <form class="d-flex mr-3" action="{% url 'buscar' %}" method="POST">
             {% csrf_token %}
-            <input class="form-control me-2" type="search" name="query" placeholder="Buscar.." aria-label="Search">
-            <button   class="btn btn-custom" type="submit">Buscar</button>
+            <input class="form-control me-2" type="search" name="query" placeholder="{% trans 'Buscar..' %}" aria-label="{% trans 'Search' %}">
+            <button class="btn btn-custom" type="submit">{% trans "Buscar" %}</button>
         </form>
     
         <!-- Espacio entre formularios -->
@@ -32,7 +34,7 @@
                     <option value="{{ option }}" {% if option == per_page %}selected{% endif %}>{{ option }}</option>
                 {% endfor %}
             </select>
-            <button   class="btn btn-custom" type="submit">Ok</button>
+            <button class="btn btn-custom" type="submit">{% trans "Ok" %}</button>
         </form>
         
     </div>
@@ -74,10 +76,10 @@
                         <input type="hidden" name="date" value="{{ imagen.date }}">
         
                         {% if imagen in favourite_list %}
-                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" disabled>&#9989; Añadida en favoritos</button>
-                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showComment('{{ imagen.title }}', '{{ imagen.comment|default:"Sin comentarios actualmente" }}')">&#128196; Comentario</button>
+                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" disabled>&#9989; {% trans "Añadida a favoritos" %}</button>
+                        <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showComment('{{ imagen.title }}', '{{ imagen.comment|default:"Sin comentarios actualmente" }}')">&#128196; {% trans "Comentario" %}</button>
                         {% else %}
-                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showMessage('{{ imagen.title }}')">⭐ Añadir a favoritos</button>
+                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showMessage('{{ imagen.title }}')">⭐{% trans "Añadir a favoritos" %}</button>
                         {% endif %}
                     </form>
                 </div>
@@ -92,7 +94,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">¡Imagen añadida a favoritos!</h5>
+                    <h5 class="modal-title" id="confirmationModalLabel">{% trans "¡Imagen añadida a favoritos!" %}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -107,7 +109,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="commentModalLabel">Comentario de <span id="modalTitle"></span></h5>
+                    <h5 class="modal-title" id="commentModalLabel">{% trans "Comentario de" %} <span id="modalTitle"></span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -119,9 +121,7 @@
     
     <script>
         function showMessage(title) {
-         
-            document.getElementById('modalMessage').innerText = `${title} se añadió a favoritos.`;
-
+            document.getElementById('modalMessage').innerText = `${title} {% trans "se añadió a favoritos." %}`;
             var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'), {
                 keyboard: false
             });
@@ -137,56 +137,50 @@
             commentModal.show();
         }
     </script>
-<!-- Paginación -->
-<div class="d-flex justify-content-center mt-4">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-            {% endif %}
 
-            {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                    <li class="page-item"><a class="page-link" href="?page={{ num }}&per_page={{ per_page }}">{{ num }}</a></li>
+    <!-- Paginación -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}" aria-label="{% trans 'Previous' %}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                 {% endif %}
-            {% endfor %}
-
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>
-
-
-<footer i class="footer bg-body-tertiary text-center text-lg-start ">
-    <div class="container-fluid p-3" style="background-color: black; color: white;">
-        <div class="d-flex justify-content-between">
-            <strong class="text-center">Introducción a la Programación | UNGS</strong>
-            <strong>{{ VERSION }}</strong>
-        </div>
+    
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}&per_page={{ per_page }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+    
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}" aria-label="{% trans 'Next' %}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
-</footer>
 
-
-   
-    
-    
- 
+    <footer class="footer bg-body-tertiary text-center text-lg-start">
+        <div class="container-fluid p-3" style="background-color: black; color: white;">
+            <div class="d-flex justify-content-between">
+                <strong class="text-center">{% trans "Introducción a la Programación | UNGS" %}</strong>
+                <strong class="text-center" style="color: white;">&#169; {% trans "2024 Todos los derechos reservados." %}</strong>
+                <a class="text-center" href="{% url 'home' %}" style="color: white;">{% trans "Inicio" %}</a>
+            </div>
+        </div>
+    </footer>
 </main>
-
 {% endblock %}

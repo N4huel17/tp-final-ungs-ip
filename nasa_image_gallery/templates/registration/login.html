@@ -1,5 +1,5 @@
 {% extends 'header.html' %}
-
+{% load i18n %}
 {% block content %}
 <style>
     body, html {
@@ -35,16 +35,16 @@
     <div class="login-form">
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-            <h2 class="text-center">Inicio de sesión</h2>
+            <h2 class="text-center">{% translate "Inicio de sesión" %}</h2>
             <div class="form-group">
-                <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required="required">
+                <input type="text" name="username" id="username" class="form-control" placeholder={% translate "Usuario" %} required="required">
             </div>
             <div class="form-group">
-                <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required="required">
+                <input type="password" name="password" id="password" class="form-control" placeholder={% translate "Contraseña" %} required="required">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-                <a class="nav-link" href="{% url 'register' %}">¿No tienes cuenta? Regístrate!</a>
+                <button type="submit" class="btn btn-primary btn-block">{% translate "Ingresar" %}</button>
+                <a class="nav-link" href="{% url 'register' %}">{% translate "¿No tienes cuenta? Regístrate!" %}</a>
             </div>
         </form>
     </div>

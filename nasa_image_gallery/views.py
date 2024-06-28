@@ -9,6 +9,26 @@ from .models import MyUser
 from .models import Favourite
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.utils.translation import activate
+from django.utils import translation
+import json
+import os
+
+# Ruta al archivo JSON de traducciones
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRADUCCIONES_JSON_PATH = os.path.join(BASE_DIR, 'traducciones.json')
+
+# Cargar el diccionario de traducciones desde el archivo JSON
+with open(TRADUCCIONES_JSON_PATH, 'r', encoding='utf-8') as file:
+    traducciones = json.load(file)
+
+
+def traducir_palabra(palabra):
+    # Función para traducir una palabra del español al inglés
+    return traducciones.get(palabra, palabra)
+
+
 
 def index_page(request):
     return render(request, 'index.html')
@@ -43,6 +63,8 @@ def search(request):
     if request.method == 'POST':
         search_msg = request.POST.get('query', '').strip()
         if search_msg:
+            # Traducir la palabra clave antes de enviarla a la búsqueda
+            search_msg = traducir_palabra(search_msg)
             images = services_nasa_image_gallery.getAllImages(search_msg)
         else:
             images = services_nasa_image_gallery.getAllImages()
@@ -56,6 +78,15 @@ def search(request):
         return render(request, 'home.html', {'page_obj': page_obj, 'favourite_list': favourite_list, 'per_page': per_page})
     else:
         return render(request, 'home.html', {'images': [], 'favourite_list': []})
+    
+
+def change_language(request):
+    language = request.GET.get('language', 'es')
+    next_url = request.GET.get('next', '/')
+    translation.activate(language)
+    response = redirect(next_url)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response
 
 def login_view(request):
     if request.method == 'POST':
