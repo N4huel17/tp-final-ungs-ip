@@ -11,6 +11,26 @@ from .models import NotInterestingImage
 from django.http import JsonResponse
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.utils.translation import activate
+from django.utils import translation
+import json
+import os
+
+# Ruta al archivo JSON de traducciones
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRADUCCIONES_JSON_PATH = os.path.join(BASE_DIR, 'traducciones.json')
+
+# Cargar el diccionario de traducciones desde el archivo JSON
+with open(TRADUCCIONES_JSON_PATH, 'r', encoding='utf-8') as file:
+    traducciones = json.load(file)
+
+
+def traducir_palabra(palabra):
+    # Función para traducir una palabra del español al inglés
+    return traducciones.get(palabra, palabra)
+
+
 
 def index_page(request):
     return render(request, 'index.html')
@@ -37,7 +57,7 @@ def home(request):
     if request.user.is_authenticated:
         not_interesting_images = NotInterestingImage.objects.filter(user=request.user).values_list('image_url', flat=True)
 
-    # Filtrar las imágenes no interesantes antes de paginar
+
     filtered_images = [img for img in images if img.image_url not in not_interesting_images]
 
     paginator = Paginator(filtered_images, per_page)
@@ -54,26 +74,49 @@ def home(request):
 def search(request):
     if request.method == 'POST':
         search_msg = request.POST.get('query', '').strip()
-        images = services_nasa_image_gallery.getAllImages(search_msg) if search_msg else services_nasa_image_gallery.getAllImages()
-
-        favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
-        per_page = int(request.GET.get('per_page', 5))
-        
-        # Obtener todas las imágenes marcadas como no interesantes por el usuario
-        user = request.user
-        not_interesting_images = NotInterestingImage.objects.filter(user=user).values_list('image_url', flat=True)
-        
-        # Filtrar las imágenes no interesantes antes de paginar
-        filtered_images = [img for img in images if img.image_url not in not_interesting_images]
-        
-        paginator = Paginator(filtered_images, per_page)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        
-        return render(request, 'home.html', {'page_obj': page_obj, 'favourite_list': favourite_list, 'per_page': per_page})
-    
+        if search_msg:
+            search_msg = traducir_palabra(search_msg)
+            images = services_nasa_image_gallery.getAllImages(search_msg)
+        else:
+            images = services_nasa_image_gallery.getAllImages()
     else:
-        return render(request, 'home.html', {'images': [], 'favourite_list': []})
+        search_msg = request.GET.get('query', '').strip()
+        if search_msg:
+            images = services_nasa_image_gallery.getAllImages(search_msg)
+        else:
+            images = services_nasa_image_gallery.getAllImages()
+
+    favourite_list = []
+    if request.user.is_authenticated:
+        favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
+
+    per_page = int(request.GET.get('per_page', 5))
+    per_page_options = [4, 6, 8, 10, 12]
+
+    user = request.user
+    not_interesting_images = NotInterestingImage.objects.filter(user=user).values_list('image_url', flat=True)
+
+    filtered_images = [img for img in images if img.image_url not in not_interesting_images]
+
+    paginator = Paginator(filtered_images, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'home.html', {
+        'page_obj': page_obj,
+        'favourite_list': favourite_list,
+        'per_page': per_page,
+        'per_page_options': per_page_options,
+        'query': search_msg
+    })
+
+def change_language(request):
+    language = request.GET.get('language', 'es')
+    next_url = request.GET.get('next', '/')
+    translation.activate(language)
+    response = redirect(next_url)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response
 
 def login_view(request):
     if request.method == 'POST':
@@ -169,8 +212,6 @@ def mark_not_interesting(request):
     if request.method == 'POST':
         image_url = request.POST.get('image_url')
         user = request.user
-
-        # Crear una entrada en NotInterestingImage si no existe
         NotInterestingImage.objects.get_or_create(image_url=image_url, user=user)
 
     return redirect('home')
