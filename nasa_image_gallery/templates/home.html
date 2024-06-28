@@ -66,6 +66,7 @@
                 </div>
                 {% if request.user.is_authenticated %}
                 <div class="card-footer text-center">
+                    
                     <form method="post" action="{% url 'agregar-favorito' %}">
                         {% csrf_token %}
                         <input type="hidden" name="title" value="{{ imagen.title }}">
@@ -78,7 +79,13 @@
                         <button type="button" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showComment('{{ imagen.title }}', '{{ imagen.comment|default:"Sin comentarios actualmente" }}')">&#128196; Comentario</button>
                         {% else %}
                         <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" onclick="showMessage('{{ imagen.title }}')">⭐ Añadir a favoritos</button>
+                        
                         {% endif %}
+                    </form>
+                    <form method="post" action="{% url 'marcar-no-interesante' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="image_url" value="{{ imagen.image_url }}">
+                        <button type="submit" class="btn btn-secondary btn-sm float-right" style="color:white">&#10060; No me interesa</button>
                     </form>
                 </div>
                 {% endif %}
@@ -116,7 +123,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         function showMessage(title) {
          

@@ -114,4 +114,17 @@ Se añadió un formulario para que el usuario pueda seleccionar la cantidad de i
 Se añadió la estructura de paginación utilizando las clases de Bootstrap para una mejor apariencia.
 Se actualizaron los enlaces de la paginación para incluir la selección de imágenes por página.
 
+-NAHUEL : (funcionalidad "No me interesa")
+views.py:
+Nueva Vista y Funcionalidad: 
+*Se creó una nueva vista llamada marcar_no_interesante en views.py, que maneja la lógica cuando un usuario marca una imagen como no interesante.
+Importación de Funciones: Se importaron funciones necesarias como get_object_or_404 para manejar objetos o devolver un error 404 si no se encuentra el objeto.
+Manejo de Requerimientos POST: Se implementó manejo de peticiones POST para procesar la marca de imágenes no interesantes.
 
+home.html:
+Botón y Formulario: 
+*Se agregó un formulario en cada tarjeta de imagen para enviar una solicitud POST cuando se marca una imagen como no interesante.
+Modal de Confirmación: Se implementó un modal de Bootstrap que se muestra cuando se marca una imagen como no interesante, indicando que la imagen no se volverá a mostrar.
+
+models.py:
+Formulario de No Interesante: Se creó un formulario simple para manejar la entrada de datos(NotInterestingForm) al marcar una imagen como no interesante.

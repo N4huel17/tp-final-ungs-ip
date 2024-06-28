@@ -66,21 +66,20 @@
             <div class="modal-body">
                 <p id="deleteModalMessage"></p>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     function showDeleteConfirmation(title, id) {
-        // Setear el mensaje en el modal de confirmación de eliminación
         document.getElementById('deleteModalMessage').innerText = `${title} se ha eliminado de favoritos exitosamente.`;
-        // Mostrar el modal de confirmación de eliminación
         var deleteConfirmationModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'), {
             keyboard: false
         });
         deleteConfirmationModal.show();
-        
-        // Enviar el formulario de eliminación al confirmar
         var deleteForm = document.getElementById(`deleteForm${id}`);
         deleteForm.submit();
     }

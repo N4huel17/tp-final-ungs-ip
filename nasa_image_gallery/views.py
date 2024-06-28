@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 from .forms import RegisterForm
 from .models import MyUser
 from .models import Favourite
+from .models import NotInterestingImage
+from django.http import JsonResponse
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 
@@ -20,15 +22,25 @@ def getAllImagesAndFavouriteList(request):
         favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
     return images, favourite_list
 
-
 def home(request):
-    images = services_nasa_image_gallery.getAllImages()  # Obtener todas las imágenes
-    favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
-    
+    images = services_nasa_image_gallery.getAllImages()  # Obtener todas las imágenes desde algún servicio o función
+
+    favourite_list = []
+    if request.user.is_authenticated:
+        favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
+
     per_page_options = [4, 6, 8, 10, 12]  # Opciones de cantidad de imágenes por página
     per_page = int(request.GET.get('per_page', 6))  # Obtener el número de imágenes por página seleccionado por el usuario
     
-    paginator = Paginator(images, per_page)
+    # Obtener todas las imágenes marcadas como no interesantes por el usuario actual
+    not_interesting_images = []
+    if request.user.is_authenticated:
+        not_interesting_images = NotInterestingImage.objects.filter(user=request.user).values_list('image_url', flat=True)
+
+    # Filtrar las imágenes no interesantes antes de paginar
+    filtered_images = [img for img in images if img.image_url not in not_interesting_images]
+
+    paginator = Paginator(filtered_images, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -42,18 +54,24 @@ def home(request):
 def search(request):
     if request.method == 'POST':
         search_msg = request.POST.get('query', '').strip()
-        if search_msg:
-            images = services_nasa_image_gallery.getAllImages(search_msg)
-        else:
-            images = services_nasa_image_gallery.getAllImages()
-        favourite_list = []
-        if request.user.is_authenticated:
-            favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
+        images = services_nasa_image_gallery.getAllImages(search_msg) if search_msg else services_nasa_image_gallery.getAllImages()
+
+        favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
         per_page = int(request.GET.get('per_page', 5))
-        paginator = Paginator(images, per_page)
+        
+        # Obtener todas las imágenes marcadas como no interesantes por el usuario
+        user = request.user
+        not_interesting_images = NotInterestingImage.objects.filter(user=user).values_list('image_url', flat=True)
+        
+        # Filtrar las imágenes no interesantes antes de paginar
+        filtered_images = [img for img in images if img.image_url not in not_interesting_images]
+        
+        paginator = Paginator(filtered_images, per_page)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        
         return render(request, 'home.html', {'page_obj': page_obj, 'favourite_list': favourite_list, 'per_page': per_page})
+    
     else:
         return render(request, 'home.html', {'images': [], 'favourite_list': []})
 
@@ -120,7 +138,7 @@ def saveFavourite(request):
 def deleteFavourite(request):
     if request.method == 'POST':
         services_nasa_image_gallery.deleteFavourite(request)
-    return redirect('home')
+    return redirect('favoritos')
 
 @login_required
 def guardar_comentario(request):
@@ -145,3 +163,14 @@ def guardar_comentario(request):
 @login_required
 def exit(request):
     pass
+
+
+def mark_not_interesting(request):
+    if request.method == 'POST':
+        image_url = request.POST.get('image_url')
+        user = request.user
+
+        # Crear una entrada en NotInterestingImage si no existe
+        NotInterestingImage.objects.get_or_create(image_url=image_url, user=user)
+
+    return redirect('home')
