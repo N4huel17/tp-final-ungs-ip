@@ -114,4 +114,37 @@ Se añadió un formulario para que el usuario pueda seleccionar la cantidad de i
 Se añadió la estructura de paginación utilizando las clases de Bootstrap para una mejor apariencia.
 Se actualizaron los enlaces de la paginación para incluir la selección de imágenes por página.
 
+-NAHUEL : (funcionalidad "No me interesa")
+views.py:
+Nueva Vista y Funcionalidad: 
+*Se creó una nueva vista llamada marcar_no_interesante en views.py, que maneja la lógica cuando un usuario marca una imagen como no interesante.
+Importación de Funciones: Se importaron funciones necesarias como get_object_or_404 para manejar objetos o devolver un error 404 si no se encuentra el objeto.
+Manejo de Requerimientos POST: Se implementó manejo de peticiones POST para procesar la marca de imágenes no interesantes.
 
+home.html:
+Botón y Formulario: 
+*Se agregó un formulario en cada tarjeta de imagen para enviar una solicitud POST cuando se marca una imagen como no interesante.
+Modal de Confirmación: Se implementó un modal de Bootstrap que se muestra cuando se marca una imagen como no interesante, indicando que la imagen no se volverá a mostrar.
+
+models.py:
+Formulario de No Interesante: Se creó un formulario simple para manejar la entrada de datos(NotInterestingForm) al marcar una imagen como no interesante.
+Valentin, Nahuel(switcheo de idiomas):
+*settings: Se agregaron los idiomas solicitados (inglés, portugués, español) en la configuración de LANGUAGES.
+Se configuró LOCALE_PATHS para que Django busque los archivos de traducción en la carpeta locale
+Se importaron las funciones necesarias (gettext_lazy, activate) para el soporte de i18n.
+Se añadió el middleware LocaleMiddleware para manejar la internacionalización.
+
+*locale: Se agregaron las traducciones en los archivos .po de la carpeta locale creada anteriormente.
+
+html:Se modificaron los archivos .html buscando cadenas para su traducción y se implementó en el header el formulario para el cambio de idioma.
+
+*views.py:Se creó la función change_language  para cambiar el idioma, importando la función translation para su correcto funcionamiento.
+
+Valentin(palabras claves en archivo.json):
+*json: se creo un archivo json que contiene palabras claves con su traduccion
+
+*views.py:
+Se agregó la ruta al archivo .json.
+Se implementó el código with open para que el programa lea y cargue el archivo traducciones.json.
+Se creó la función traducir_palabra, que tiene como propósito traducir una palabra del español al inglés, de manera que al buscar "luna" (moon) en el buscador, se muestren diapositivas de la luna.
+se modifico def search colocando el traducir_palabra para el uso de esta funcion

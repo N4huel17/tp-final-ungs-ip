@@ -1,13 +1,15 @@
 <!-- favourites.html -->
+
 {% extends 'header.html' %} 
 {% block content %}
+{% load i18n %}
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2>Listado de <strong>FAVORITOS</strong></h2>
+                        <h2>{% trans "Listado de" %} <strong>{% translate "FAVORITOS" %}</strong></h2>
                     </div>
                 </div>
             </div>
@@ -15,12 +17,12 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Imagen</th>
-                        <th>Título <i class="fa fa-sort"></i></th>
-                        <th>Descripción</th>
-                        <th>Fecha <i class="fa fa-sort"></i></th>
-                        <th>Comentario</th>
-                        <th>Acciones</th>
+                        <th>{% translate "Imagen" %}</th>
+                        <th>{% translate "Titulo" %} <i class="fa fa-sort"></i></th>
+                        <th>{% translate "Descripción" %}</th>
+                        <th>{% translate "Fecha" %} <i class="fa fa-sort"></i></th>
+                        <th>{% translate "Comentario" %}</th>
+                        <th>{% translate "Acciones" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +39,7 @@
                                 {% csrf_token %}
                                 <input type="hidden" name="id" value="{{ favorito.id }}">
                                 <textarea name="comment" rows="2" cols="20">{{ favorito.comment|default:"Actualmente sin comentarios" }}</textarea>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit" class="btn btn-primary">{% trans "Guardar" %}</button>
                             </form>
                         </td>
                         <td>
@@ -60,11 +62,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirmationModalLabel">¡Imagen eliminada de favoritos!</h5>
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">{% translate "¡Imagen eliminada de favoritos!" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p id="deleteModalMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -72,15 +77,11 @@
 
 <script>
     function showDeleteConfirmation(title, id) {
-        // Setear el mensaje en el modal de confirmación de eliminación
         document.getElementById('deleteModalMessage').innerText = `${title} se ha eliminado de favoritos exitosamente.`;
-        // Mostrar el modal de confirmación de eliminación
         var deleteConfirmationModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'), {
             keyboard: false
         });
         deleteConfirmationModal.show();
-        
-        // Enviar el formulario de eliminación al confirmar
         var deleteForm = document.getElementById(`deleteForm${id}`);
         deleteForm.submit();
     }

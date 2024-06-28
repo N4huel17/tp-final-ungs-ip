@@ -66,3 +66,11 @@ class Favourite(models.Model):
 
     class Meta:
         unique_together = ('user', 'title', 'description', 'image_url', 'date', 'comment')
+
+
+class NotInterestingImage(models.Model):
+    image_url = models.URLField(unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Not Interesting Image: {self.image_url} - User: {self.user.email}"
