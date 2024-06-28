@@ -9,8 +9,8 @@ from .models import MyUser
 from .models import Favourite
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import activate 
 from django.conf import settings
+from django.utils.translation import activate
 
 
 
@@ -67,13 +67,13 @@ def change_language(request):
     if request.method == 'GET' and 'language' in request.GET:
         language = request.GET['language']
         activate(language)
+        next_page = request.GET.get('next', '/')
+        print(f'Idioma activado: {language}')
+        print(f'Redirigiendo a: {next_page}')
     
     # Redirige de vuelta a la página actual después de cambiar el idioma
     next_page = request.GET.get('next', '/')
     return redirect(next_page)
-    
-    
-    
 
 def login_view(request):
     if request.method == 'POST':

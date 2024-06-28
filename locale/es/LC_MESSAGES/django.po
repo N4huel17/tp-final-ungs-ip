@@ -1,0 +1,210 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-28 00:37-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\main\settings.py:88
+msgid "English"
+msgstr "Inglés"
+
+#: .\main\settings.py:89
+msgid "Spanish"
+msgstr "Español"
+
+#: .\main\settings.py:90
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: .\nasa_image_gallery\templates\favourites.html:12
+msgid "Listado de"
+msgstr "Listado de"
+
+#: .\nasa_image_gallery\templates\favourites.html:12
+msgid "FAVORITOS"
+msgstr "FAVORITOS"
+
+#: .\nasa_image_gallery\templates\favourites.html:20
+msgid "Imagen"
+msgstr "Imagen"
+
+#: .\nasa_image_gallery\templates\favourites.html:21
+msgid "Titulo"
+msgstr "Título"
+
+#: .\nasa_image_gallery\templates\favourites.html:22
+msgid "Descripción"
+msgstr "Descripción"
+
+#: .\nasa_image_gallery\templates\favourites.html:23
+msgid "Fecha"
+msgstr "Fecha"
+
+#: .\nasa_image_gallery\templates\favourites.html:24
+#: .\nasa_image_gallery\templates\home.html:80
+msgid "Comentario"
+msgstr "Comentario"
+
+#: .\nasa_image_gallery\templates\favourites.html:25
+msgid "Acciones"
+msgstr "Acciones"
+
+#: .\nasa_image_gallery\templates\favourites.html:42
+msgid "Guardar"
+msgstr "Guardar"
+
+#: .\nasa_image_gallery\templates\favourites.html:65
+msgid "¡Imagen eliminada de favoritos!"
+msgstr "¡Imagen eliminada de favoritos!"
+
+#: .\nasa_image_gallery\templates\footer.html:7
+#: .\nasa_image_gallery\templates\home.html:179
+msgid "Introducción a la Programación | UNGS"
+msgstr "Introducción a la Programación | UNGS"
+
+#: .\nasa_image_gallery\templates\header.html:7
+msgid "Mi primera aplicación con Django"
+msgstr "Mi primera aplicación con Django"
+
+#: .\nasa_image_gallery\templates\header.html:28
+msgid "Repositorio del Proyecto TP"
+msgstr "Repositorio del Proyecto TP"
+
+#: .\nasa_image_gallery\templates\header.html:35
+#: .\nasa_image_gallery\templates\home.html:181
+msgid "Inicio"
+msgstr "Inicio"
+
+#: .\nasa_image_gallery\templates\header.html:38
+msgid "Galería"
+msgstr "Galería"
+
+#: .\nasa_image_gallery\templates\header.html:42
+msgid "Favoritos"
+msgstr "Favoritos"
+
+#: .\nasa_image_gallery\templates\header.html:47
+msgid "Salir"
+msgstr "Salir"
+
+#: .\nasa_image_gallery\templates\header.html:49
+msgid "Iniciar Sesion"
+msgstr "Iniciar Sesión"
+
+#: .\nasa_image_gallery\templates\header.html:60
+msgid "Inglés"
+msgstr "Inglés"
+
+#: .\nasa_image_gallery\templates\header.html:61
+msgid "Español"
+msgstr "Español"
+
+#: .\nasa_image_gallery\templates\header.html:62
+msgid "Portugues"
+msgstr "Portugués"
+
+#: .\nasa_image_gallery\templates\home.html:6
+msgid "Galería de Imágenes de la NASA"
+msgstr "Galería de Imágenes de la NASA"
+
+#: .\nasa_image_gallery\templates\home.html:11
+msgid "Buscar.."
+msgstr "Buscar.."
+
+#: .\nasa_image_gallery\templates\home.html:11
+msgid "Search"
+msgstr "Buscar"
+
+#: .\nasa_image_gallery\templates\home.html:12
+msgid "Buscar"
+msgstr "Buscar"
+
+#: .\nasa_image_gallery\templates\home.html:37
+msgid "Ok"
+msgstr "Ok"
+
+#: .\nasa_image_gallery\templates\home.html:79
+msgid "Añadida a favoritos"
+msgstr "Añadida a favoritos"
+
+#: .\nasa_image_gallery\templates\home.html:82
+msgid "Añadir a favoritos"
+msgstr "Añadir a favoritos"
+
+#: .\nasa_image_gallery\templates\home.html:97
+msgid "¡Imagen añadida a favoritos!"
+msgstr "¡Imagen añadida a favoritos!"
+
+#: .\nasa_image_gallery\templates\home.html:112
+msgid "Comentario de"
+msgstr "Comentario de"
+
+#: .\nasa_image_gallery\templates\home.html:124
+msgid "se añadió a favoritos."
+msgstr "se añadió a favoritos."
+
+#: .\nasa_image_gallery\templates\home.html:147
+msgid "Previous"
+msgstr "Anterior"
+
+#: .\nasa_image_gallery\templates\home.html:165
+msgid "Next"
+msgstr "Siguiente"
+
+#: .\nasa_image_gallery\templates\home.html:180
+msgid "2024 Todos los derechos reservados."
+msgstr "2024 Todos los derechos reservados."
+
+#: .\nasa_image_gallery\templates\index.html:38
+#: .\nasa_image_gallery\templates\index.html:40
+msgid "Bienvenido"
+msgstr "Bienvenido"
+
+#: .\nasa_image_gallery\templates\index.html:43
+msgid "Mirá las imagenes desde "
+msgstr "Mira las imágenes desde "
+
+#: .\nasa_image_gallery\templates\index.html:43
+msgid "este link"
+msgstr "este enlace"
+
+#: .\nasa_image_gallery\templates\registration\login.html:38
+msgid "Inicio de sesión"
+msgstr "Inicio de sesión"
+
+#: .\nasa_image_gallery\templates\registration\login.html:40
+msgid "Usuario"
+msgstr "Usuario"
+
+#: .\nasa_image_gallery\templates\registration\login.html:43
+msgid "Contraseña"
+msgstr "Contraseña"
+
+#: .\nasa_image_gallery\templates\registration\login.html:46
+msgid "Ingresar"
+msgstr "Ingresar"
+
+#: .\nasa_image_gallery\templates\registration\login.html:47
+msgid "¿No tienes cuenta? Regístrate!"
+msgstr "¿No tienes cuenta? ¡Regístrate!"
+
+#: .\nasa_image_gallery\templates\registration\register.html:38
+msgid "Registro de usuario"
+msgstr "Registro de usuario"
+
+#: .\nasa_image_gallery\templates\registration\register.html:41
+msgid "Registrarse"
+msgstr "Registrarse"

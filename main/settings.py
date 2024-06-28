@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'nasa_image_gallery',
     'bootstrap5',
     'main',
-        # Asegúrate de incluir la app principal si la tienes
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
 }
 
 # Configuración para el modelo de usuario personalizado
@@ -83,7 +82,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 LANGUAGES = [
     ('en', _('English')),
