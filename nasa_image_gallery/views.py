@@ -9,6 +9,11 @@ from .models import MyUser
 from .models import Favourite
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import activate 
+from django.conf import settings
+
+
+
 
 def index_page(request):
     return render(request, 'index.html')
@@ -56,6 +61,19 @@ def search(request):
         return render(request, 'home.html', {'page_obj': page_obj, 'favourite_list': favourite_list, 'per_page': per_page})
     else:
         return render(request, 'home.html', {'images': [], 'favourite_list': []})
+    
+    
+def change_language(request):
+    if request.method == 'GET' and 'language' in request.GET:
+        language = request.GET['language']
+        activate(language)
+    
+    # Redirige de vuelta a la página actual después de cambiar el idioma
+    next_page = request.GET.get('next', '/')
+    return redirect(next_page)
+    
+    
+    
 
 def login_view(request):
     if request.method == 'POST':

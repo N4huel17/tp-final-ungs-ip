@@ -1,5 +1,5 @@
 {% extends 'header.html' %}
-
+{% load i18n %}
 {% block content %}
 <style>
     body, html {
@@ -35,10 +35,10 @@
     <div class="register-form">
         <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
-            <h2 class="text-center">Registro de usuario</h2>
+            <h2 class="text-center">{% translate "Registro de usuario" %}</h2>
             {{ form.as_p }}
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                <button type="submit" class="btn btn-primary btn-block">{% translate "Registrarse" %}</button>
             </div>
         </form>
     </div>
