@@ -11,7 +11,22 @@ from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.translation import activate
+from django.utils import translation
+import json
+import os
 
+# Ruta al archivo JSON de traducciones
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRADUCCIONES_JSON_PATH = os.path.join(BASE_DIR, 'traducciones.json')
+
+# Cargar el diccionario de traducciones desde el archivo JSON
+with open(TRADUCCIONES_JSON_PATH, 'r', encoding='utf-8') as file:
+    traducciones = json.load(file)
+
+
+def traducir_palabra(palabra):
+    # Función para traducir una palabra del español al inglés
+    return traducciones.get(palabra, palabra)
 
 
 
@@ -48,6 +63,8 @@ def search(request):
     if request.method == 'POST':
         search_msg = request.POST.get('query', '').strip()
         if search_msg:
+            # Traducir la palabra clave antes de enviarla a la búsqueda
+            search_msg = traducir_palabra(search_msg)
             images = services_nasa_image_gallery.getAllImages(search_msg)
         else:
             images = services_nasa_image_gallery.getAllImages()
@@ -62,18 +79,14 @@ def search(request):
     else:
         return render(request, 'home.html', {'images': [], 'favourite_list': []})
     
-    
+
 def change_language(request):
-    if request.method == 'GET' and 'language' in request.GET:
-        language = request.GET['language']
-        activate(language)
-        next_page = request.GET.get('next', '/')
-        print(f'Idioma activado: {language}')
-        print(f'Redirigiendo a: {next_page}')
-    
-    # Redirige de vuelta a la página actual después de cambiar el idioma
-    next_page = request.GET.get('next', '/')
-    return redirect(next_page)
+    language = request.GET.get('language', 'es')
+    next_url = request.GET.get('next', '/')
+    translation.activate(language)
+    response = redirect(next_url)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response
 
 def login_view(request):
     if request.method == 'POST':

@@ -1,12 +1,11 @@
-# urls.py
+ # urls.py
 from django.contrib import admin
 from django.urls import path, include  # Asegúrate de importar 'include'
 from . import views
 from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
-    path('i18n/', include('django.conf.urls.i18n')),  # Asegúrate de incluir la ruta de internacionalización
-]
+
+
 
 urlpatterns = [
     path('', views.index_page, name='index-page'),
@@ -20,4 +19,5 @@ urlpatterns = [
     path('exit/', views.logout_view, name='exit'),
     path('register/', views.register_view, name='register'),
     path('change-language/', views.change_language, name='change_language'),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

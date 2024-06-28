@@ -115,3 +115,23 @@ Se añadió la estructura de paginación utilizando las clases de Bootstrap para
 Se actualizaron los enlaces de la paginación para incluir la selección de imágenes por página.
 
 
+Valentin, Nahuel(switcheo de idiomas):
+*settings: Se agregaron los idiomas solicitados (inglés, portugués, español) en la configuración de LANGUAGES.
+Se configuró LOCALE_PATHS para que Django busque los archivos de traducción en la carpeta locale
+Se importaron las funciones necesarias (gettext_lazy, activate) para el soporte de i18n.
+Se añadió el middleware LocaleMiddleware para manejar la internacionalización.
+
+*locale: Se agregaron las traducciones en los archivos .po de la carpeta locale creada anteriormente.
+
+html:Se modificaron los archivos .html buscando cadenas para su traducción y se implementó en el header el formulario para el cambio de idioma.
+
+*views.py:Se creó la función change_language  para cambiar el idioma, importando la función translation para su correcto funcionamiento.
+
+Valentin(palabras claves en archivo.json):
+*json: se creo un archivo json que contiene palabras claves con su traduccion
+
+*views.py:
+Se agregó la ruta al archivo .json.
+Se implementó el código with open para que el programa lea y cargue el archivo traducciones.json.
+Se creó la función traducir_palabra, que tiene como propósito traducir una palabra del español al inglés, de manera que al buscar "luna" (moon) en el buscador, se muestren diapositivas de la luna.
+se modifico def search colocando el traducir_palabra para el uso de esta funcion

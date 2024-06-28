@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-2drt2_^@w@6)3npj24wi%xe^&88icb)dw&e0!^%eao3r6l4fkt'
@@ -81,6 +82,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 LANGUAGE_CODE = 'es'
 

@@ -19,118 +19,118 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 #: .\main\settings.py:88
 msgid "English"
-msgstr "Inglés"
+msgstr "English"
 
 #: .\main\settings.py:89
 msgid "Spanish"
-msgstr "Español"
+msgstr "Spanish"
 
 #: .\main\settings.py:90
 msgid "Portuguese"
-msgstr "Portugués"
+msgstr "Portuguese"
 
 #: .\nasa_image_gallery\templates\favourites.html:12
 msgid "Listado de"
-msgstr "Listado de"
+msgstr "List "
 
 #: .\nasa_image_gallery\templates\favourites.html:12
 msgid "FAVORITOS"
-msgstr "FAVORITOS"
+msgstr "Favorites"
 
 #: .\nasa_image_gallery\templates\favourites.html:20
 msgid "Imagen"
-msgstr "Imagen"
+msgstr "image"
 
 #: .\nasa_image_gallery\templates\favourites.html:21
 msgid "Titulo"
-msgstr "Título"
+msgstr "title"
 
 #: .\nasa_image_gallery\templates\favourites.html:22
 msgid "Descripción"
-msgstr "Descripción"
+msgstr "Description"
 
 #: .\nasa_image_gallery\templates\favourites.html:23
 msgid "Fecha"
-msgstr "Fecha"
+msgstr "date"
 
 #: .\nasa_image_gallery\templates\favourites.html:24
 #: .\nasa_image_gallery\templates\home.html:80
 msgid "Comentario"
-msgstr "Comentario"
+msgstr "Comment"
 
 #: .\nasa_image_gallery\templates\favourites.html:25
 msgid "Acciones"
-msgstr "Acciones"
+msgstr "Actions"
 
 #: .\nasa_image_gallery\templates\favourites.html:42
 msgid "Guardar"
-msgstr "Guardar"
+msgstr "save"
 
 #: .\nasa_image_gallery\templates\favourites.html:65
 msgid "¡Imagen eliminada de favoritos!"
-msgstr "¡Imagen eliminada de favoritos!"
+msgstr "Image removed from favorites!"
 
 #: .\nasa_image_gallery\templates\footer.html:7
 #: .\nasa_image_gallery\templates\home.html:179
 msgid "Introducción a la Programación | UNGS"
-msgstr "Introducción a la Programación | UNGS"
+msgstr "Introduction to Programming | UNGS"
 
 #: .\nasa_image_gallery\templates\header.html:7
 msgid "Mi primera aplicación con Django"
-msgstr "Mi primera aplicación con Django"
+msgstr "My first application with Django"
 
 #: .\nasa_image_gallery\templates\header.html:28
 msgid "Repositorio del Proyecto TP"
-msgstr "Repositorio del Proyecto TP"
+msgstr "TP Project Repository"
 
 #: .\nasa_image_gallery\templates\header.html:35
 #: .\nasa_image_gallery\templates\home.html:181
 msgid "Inicio"
-msgstr "Inicio"
+msgstr "initiation"
 
 #: .\nasa_image_gallery\templates\header.html:38
 msgid "Galería"
-msgstr "Galería"
+msgstr "Gallery"
 
 #: .\nasa_image_gallery\templates\header.html:42
 msgid "Favoritos"
-msgstr "Favoritos"
+msgstr "Favorites"
 
 #: .\nasa_image_gallery\templates\header.html:47
 msgid "Salir"
-msgstr "Salir"
+msgstr "leave"
 
 #: .\nasa_image_gallery\templates\header.html:49
 msgid "Iniciar Sesion"
-msgstr "Iniciar Sesión"
+msgstr "Log in"
 
 #: .\nasa_image_gallery\templates\header.html:60
 msgid "Inglés"
-msgstr "Inglés"
+msgstr "English"
 
 #: .\nasa_image_gallery\templates\header.html:61
 msgid "Español"
-msgstr "Español"
+msgstr "Spanish"
 
 #: .\nasa_image_gallery\templates\header.html:62
 msgid "Portugues"
-msgstr "Portugués"
+msgstr "Portuguese"
 
 #: .\nasa_image_gallery\templates\home.html:6
 msgid "Galería de Imágenes de la NASA"
-msgstr "Galería de Imágenes de la NASA"
+msgstr "NASA Image Gallery"
 
 #: .\nasa_image_gallery\templates\home.html:11
 msgid "Buscar.."
-msgstr "Buscar.."
+msgstr "Search.."
 
 #: .\nasa_image_gallery\templates\home.html:11
 msgid "Search"
-msgstr "Buscar"
+msgstr "Search"
 
 #: .\nasa_image_gallery\templates\home.html:12
 msgid "Buscar"
-msgstr "Buscar"
+msgstr "Search"
 
 #: .\nasa_image_gallery\templates\home.html:37
 msgid "Ok"
@@ -138,73 +138,73 @@ msgstr "Ok"
 
 #: .\nasa_image_gallery\templates\home.html:79
 msgid "Añadida a favoritos"
-msgstr "Añadida a favoritos"
+msgstr "Added to favorites"
 
 #: .\nasa_image_gallery\templates\home.html:82
 msgid "Añadir a favoritos"
-msgstr "Añadir a favoritos"
+msgstr "Add to Favorites"
 
 #: .\nasa_image_gallery\templates\home.html:97
 msgid "¡Imagen añadida a favoritos!"
-msgstr "¡Imagen añadida a favoritos!"
+msgstr "Image added to favorites!"
 
 #: .\nasa_image_gallery\templates\home.html:112
 msgid "Comentario de"
-msgstr "Comentario de"
+msgstr "Comment from"
 
 #: .\nasa_image_gallery\templates\home.html:124
 msgid "se añadió a favoritos."
-msgstr "se añadió a favoritos."
+msgstr "was added to favorites."
 
 #: .\nasa_image_gallery\templates\home.html:147
 msgid "Previous"
-msgstr "Anterior"
+msgstr "previous"
 
 #: .\nasa_image_gallery\templates\home.html:165
 msgid "Next"
-msgstr "Siguiente"
+msgstr "next"
 
 #: .\nasa_image_gallery\templates\home.html:180
 msgid "2024 Todos los derechos reservados."
-msgstr "2024 Todos los derechos reservados."
+msgstr "2024 All rights reserved."
 
 #: .\nasa_image_gallery\templates\index.html:38
 #: .\nasa_image_gallery\templates\index.html:40
 msgid "Bienvenido"
-msgstr "Bienvenido"
+msgstr "Welcome"
 
 #: .\nasa_image_gallery\templates\index.html:43
 msgid "Mirá las imagenes desde "
-msgstr "Mira las imágenes desde "
+msgstr "See the images from "
 
 #: .\nasa_image_gallery\templates\index.html:43
 msgid "este link"
-msgstr "este enlace"
+msgstr "this link"
 
 #: .\nasa_image_gallery\templates\registration\login.html:38
 msgid "Inicio de sesión"
-msgstr "Inicio de sesión"
+msgstr "Log in"
 
 #: .\nasa_image_gallery\templates\registration\login.html:40
 msgid "Usuario"
-msgstr "Usuario"
+msgstr "User"
 
 #: .\nasa_image_gallery\templates\registration\login.html:43
 msgid "Contraseña"
-msgstr "Contraseña"
+msgstr "Password"
 
 #: .\nasa_image_gallery\templates\registration\login.html:46
 msgid "Ingresar"
-msgstr "Ingresar"
+msgstr "Get into"
 
 #: .\nasa_image_gallery\templates\registration\login.html:47
 msgid "¿No tienes cuenta? Regístrate!"
-msgstr "¿No tienes cuenta? ¡Regístrate!"
+msgstr "You do not have an account? Sign up!"
 
 #: .\nasa_image_gallery\templates\registration\register.html:38
 msgid "Registro de usuario"
-msgstr "Registro de usuario"
+msgstr "User register"
 
 #: .\nasa_image_gallery\templates\registration\register.html:41
 msgid "Registrarse"
-msgstr "Registrarse"
+msgstr "Register"

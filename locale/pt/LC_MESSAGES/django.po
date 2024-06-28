@@ -73,15 +73,15 @@ msgstr "Imagem removida dos favoritos!"
 #: .\nasa_image_gallery\templates\footer.html:7
 #: .\nasa_image_gallery\templates\home.html:179
 msgid "Introducción a la Programación | UNGS"
-msgstr ""
+msgstr "Introdução à Programação | UNGS"
 
 #: .\nasa_image_gallery\templates\header.html:7
 msgid "Mi primera aplicación con Django"
-msgstr ""
+msgstr "Minha primeira aplicação com Django"
 
 #: .\nasa_image_gallery\templates\header.html:28
 msgid "Repositorio del Proyecto TP"
-msgstr ""
+msgstr "Repositório de Projetos TP"
 
 #: .\nasa_image_gallery\templates\header.html:35
 #: .\nasa_image_gallery\templates\home.html:181
@@ -118,43 +118,43 @@ msgstr "Português"
 
 #: .\nasa_image_gallery\templates\home.html:6
 msgid "Galería de Imágenes de la NASA"
-msgstr ""
+msgstr "Galeria de imagens da NASA"
 
 #: .\nasa_image_gallery\templates\home.html:11
 msgid "Buscar.."
-msgstr ""
+msgstr "Procurar.."
 
 #: .\nasa_image_gallery\templates\home.html:11
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: .\nasa_image_gallery\templates\home.html:12
 msgid "Buscar"
-msgstr ""
+msgstr "Procurar"
 
 #: .\nasa_image_gallery\templates\home.html:37
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: .\nasa_image_gallery\templates\home.html:79
 msgid "Añadida a favoritos"
-msgstr ""
+msgstr "Adicionado aos favoritos"
 
 #: .\nasa_image_gallery\templates\home.html:82
 msgid "Añadir a favoritos"
-msgstr ""
+msgstr "Adicionar aos favoritos"
 
 #: .\nasa_image_gallery\templates\home.html:97
 msgid "¡Imagen añadida a favoritos!"
-msgstr ""
+msgstr "Imagem adicionada aos favoritos!"
 
 #: .\nasa_image_gallery\templates\home.html:112
 msgid "Comentario de"
-msgstr ""
+msgstr "Comentário de"
 
 #: .\nasa_image_gallery\templates\home.html:124
 msgid "se añadió a favoritos."
-msgstr ""
+msgstr "foi adicionado aos favoritos."
 
 #: .\nasa_image_gallery\templates\home.html:147
 msgid "Previous"
@@ -166,45 +166,45 @@ msgstr "Próximo"
 
 #: .\nasa_image_gallery\templates\home.html:180
 msgid "2024 Todos los derechos reservados."
-msgstr ""
+msgstr "2024 Todos os direitos reservados"
 
 #: .\nasa_image_gallery\templates\index.html:38
 #: .\nasa_image_gallery\templates\index.html:40
 msgid "Bienvenido"
-msgstr ""
+msgstr "Bemvindo"
 
 #: .\nasa_image_gallery\templates\index.html:43
 msgid "Mirá las imagenes desde "
-msgstr ""
+msgstr "Veja as imagens de"
 
 #: .\nasa_image_gallery\templates\index.html:43
 msgid "este link"
-msgstr ""
+msgstr "esse link"
 
 #: .\nasa_image_gallery\templates\registration\login.html:38
 msgid "Inicio de sesión"
-msgstr ""
+msgstr "Conecte-Se"
 
 #: .\nasa_image_gallery\templates\registration\login.html:40
 msgid "Usuario"
-msgstr ""
+msgstr "Do utilizador"
 
 #: .\nasa_image_gallery\templates\registration\login.html:43
 msgid "Contraseña"
-msgstr ""
+msgstr "Senha"
 
 #: .\nasa_image_gallery\templates\registration\login.html:46
 msgid "Ingresar"
-msgstr ""
+msgstr "Entrar"
 
 #: .\nasa_image_gallery\templates\registration\login.html:47
 msgid "¿No tienes cuenta? Regístrate!"
-msgstr ""
+msgstr "Você não tem uma conta? Cadastre-se!"
 
 #: .\nasa_image_gallery\templates\registration\register.html:38
 msgid "Registro de usuario"
-msgstr ""
+msgstr "Cadastro de usuário"
 
 #: .\nasa_image_gallery\templates\registration\register.html:41
 msgid "Registrarse"
-msgstr ""
+msgstr "Check-in"
