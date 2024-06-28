@@ -26,7 +26,8 @@ Python Debugger.
 6) SuperUser: admin@gmail.com (contraseña:admin)
 
 
-### Metodologia de trabajo: 
+### Metodologia de trabajo:
+
 trabajo de ramas, cada integrante tendra su rama donde debera trabajar en sus tareas.
 1) Rama principal: (Main o master/ dependiendo de la configuracion de la pc )
 2) rama de cada integrante
@@ -36,15 +37,16 @@ nahuel01
 git pull (bajar cambios )
 git add . (guardar cambios hechos )
 git commit -m"mensaje describiendo lo realizado "
-git push origin nombreDelaRama (diego01,valen01,nahuel01) = Subir cambios
+git push origin nombreDelaRama (diego01,valen01,NAHUEL01) = Subir cambios
 
 IMPORTANTE: Antes de empezar a realizar tareas deberan hacer "git pull" en main y bajar los cambios para evitar confictos, luego deberan moverse a sus ramas (git checkout nombre_de_la_rama), seguido una vez estando en su rama poner el comando "git merge main", para traer los cambios de main a sus rama .NUNCA MERGEAR UNA RAMA ESTANDO PARADO EN MAIN
 
 Metodologia Agil: 
 SCRUM = Sofware Taiga (repartición de tareas e informes). 
 
-Explicación Funcionalidades Implementadas en el proyecto  :
--Nahuel (mostrar las fotos desde la API de la NASA).
+### Explicación Funcionalidades Implementadas en el proyecto  :
+
+-NAHUEL (mostrar las fotos desde la API de la NASA).
 
 *Cambios en views.py:
 Importación Directa de la Función getAllImages:  desde services_nasa_image_gallery.py.
@@ -56,7 +58,7 @@ Uso de getAllImages desde transport.py: Importamos y llamamos directamente la fu
 Mapeo a Objetos NASACard: Utilizamos el mapeador fromRequestIntoNASACard para convertir cada objeto JSON en un objeto NASACard.
 Retorno de Imágenes Mapeadas: Finalmente, retornamos la lista de imágenes convertidas en objetos NASACard.
 
--Nahuel (Hacer que el buscador funcione):
+-NAHUEL (Hacer que el buscador funcione):
 *Archivo views.py:
 Función search(request): Se modificó para manejar tanto la búsqueda como el caso donde no se ingresa ningún término devolver por defecto "space".
 
@@ -64,7 +66,7 @@ Función search(request): Se modificó para manejar tanto la búsqueda como el c
 *Se llamó a services_nasa_image_gallery.getAllImages() con el término de búsqueda para obtener las imágenes filtradas.
 *Si no se proporcionó un término de búsqueda, se llamó a services_nasa_image_gallery.getAllImages() sin parámetros, lo que devuelve las imágenes relacionadas con "SPACE".
 
--Valentin:
+-VALENTIN:
 cambios en header.html 
 se cambiaron las redirecciones para que al apretar en iniciar sesion te mande a /login y al salir la redireccion sea exit
 
@@ -88,7 +90,7 @@ agrega un elemento a la lista de favoritos del usuario
 deleteFavourite:
  elimina un elemento de la lista de favoritos del usuario
 
- -Nahuel : (Dar de alta anuevos usuarios y enviar email de confirmacion)
+ -NAHUEL : (Dar de alta anuevos usuarios y enviar email de confirmacion)
 
  *Cambios en models.py:
 Modelo de Usuario Personalizado: Se creó un modelo de usuario personalizado (MyUser) que extiende AbstractBaseUser de Django. Esto permite utilizar el correo electrónico como campo de identificación principal.
@@ -128,7 +130,9 @@ Modal de Confirmación: Se implementó un modal de Bootstrap que se muestra cuan
 
 models.py:
 Formulario de No Interesante: Se creó un formulario simple para manejar la entrada de datos(NotInterestingForm) al marcar una imagen como no interesante.
-Valentin, Nahuel(switcheo de idiomas):
+
+
+VALENTIN, NAHUEL(switcheo de idiomas):
 *settings: Se agregaron los idiomas solicitados (inglés, portugués, español) en la configuración de LANGUAGES.
 Se configuró LOCALE_PATHS para que Django busque los archivos de traducción en la carpeta locale
 Se importaron las funciones necesarias (gettext_lazy, activate) para el soporte de i18n.
@@ -140,7 +144,7 @@ html:Se modificaron los archivos .html buscando cadenas para su traducción y se
 
 *views.py:Se creó la función change_language  para cambiar el idioma, importando la función translation para su correcto funcionamiento.
 
-Valentin(palabras claves en archivo.json):
+VALENTIN(palabras claves en archivo.json):
 *json: se creo un archivo json que contiene palabras claves con su traduccion
 
 *views.py:
